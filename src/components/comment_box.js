@@ -3,13 +3,28 @@ import React, { Component, PropTypes } from 'react';
 /**
  * ComponentName
  */
-export default class CommentBox extends Component { // eslint-disable-line react/prefer-stateless-function
+export default class CommentBox extends Component {
+    constructor(props) {
+      super(props);
+
+      this.state = { comment: ''};
+    }
+
+    handleChange(event) {
+      this.setState({ comment: event.target.value});
+    }
+
+    handleSubmit(event) {
+      event.preventDefault();
+      this.setState({comment: ''});
+    }
+
   render() {
     return (
-      <div className="comment-box"> 
-        <textarea name="" id="" cols="30" rows="10"></textarea>
-        <button></button>
-      </div>
+      <form onSubmit={this.handleSubmit.bind(this)} className="comment-box">
+        <textarea value={this.state.comment} onChange={this.handleChange.bind(this)} />
+        <button>Submit Comment</button>
+      </form>
     );
   }
 }
