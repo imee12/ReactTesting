@@ -12,6 +12,11 @@ describe('App' , () => {
 
 // use it to test a single attribute of a target
   it('shows a comment box', () => {
-    expect(component.find('.comment-box')).to.exist
+    expect(component.find('.comment-box')).to.exist;
+  });
+
+  it('shows a comment list', () => {
+    expect(component.find('.comment-list')).to.exist;
+
   });
 });
