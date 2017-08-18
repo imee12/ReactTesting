@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 /**
  * ComponentName
  */
-export default class CommentBox extends Component {
+class CommentBox extends Component {
     constructor(props) {
       super(props);
 
@@ -16,19 +17,26 @@ export default class CommentBox extends Component {
 
     handleSubmit(event) {
       event.preventDefault();
+      this.props.saveComment(this.state.comment);
       this.setState({comment: ''});
     }
 
   render() {
     return (
       <form onSubmit={this.handleSubmit.bind(this)} className="comment-box">
-        <textarea value={this.state.comment} onChange={this.handleChange.bind(this)} />
-        <button>Submit Comment</button>
+        <h4>Add a comment</h4>
+          <textarea value={this.state.comment} onChange={this.handleChange.bind(this)} />
+        <div>
+          <button>Submit Comment</button>
+        </div>
       </form>
     );
   }
 }
 
+
+// skipping mapPropsToDispatch -- * - actions instead -- bind all of action creators to CommentBox class
+export default connect(null, actions)(CommentBox)
 // ComponentName.propTypes = {
 //   prop: PropTypes.type.isRequired
 // }
